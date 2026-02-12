@@ -1,6 +1,6 @@
 {
   "name": "Query Performance Insights (QPI)",
-  "version": "1.0",
+  "version": "1.0.0",
   "description": "Professional Oracle APEX Region Plugin for real-time SQL execution monitoring, plan hash detection, and execution plan visualization using DBMS_XPLAN.",
   "keywords": [
     "oracle apex",
@@ -26,19 +26,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Owais928/Data-Quality-Insights-Oracle-Apex-Plugin.git"
+    "url": "https://github.com/Owais928/Query-Performance-Insights-QPI.git"
   },
-  "previewImage": "https://raw.githubusercontent.com/Owais928/Query-Performance-Insights-QPI/main/QPI.gif",
   "oracle": {
-    "versions": ["19c", "21c", "23c", "26ai"],
+    "versions": ["19.0.0", "21.0.0", "23.0.0", "26.0.0"],
     "apex": {
       "versions": ["24.2"],
       "plugin": {
-        "internalName": "QPI.APEX.PLUGIN",
+        "internalName": "COM.ORATECH.QPI",
         "type": "region",
         "demo": "https://portfolio.oracletech.com.pk/ords/r/ot/apex-query-performance-insights-qpi/login",
         "previewImage": "https://raw.githubusercontent.com/Owais928/Query-Performance-Insights-QPI/main/QPI.gif"
       }
     }
   }
-}

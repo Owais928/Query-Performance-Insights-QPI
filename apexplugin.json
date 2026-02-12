@@ -1,42 +1,50 @@
 {
-  "name": "Query Performance Insights (QPI)",
-  "version": "1.0.0",
-  "description": "Professional Oracle APEX Region Plugin for real-time SQL execution monitoring, plan hash detection, and execution plan visualization using DBMS_XPLAN.",
-  "keywords": [
-    "oracle apex",
-    "apex plugin",
-    "sql performance",
-    "execution plan",
-    "dbms_xplan",
-    "plan hash",
-    "performance monitoring",
-    "query optimization"
-  ],
-  "homepage": "https://github.com/Owais928/Query-Performance-Insights-QPI",
-  "bugs": {
-    "url": "https://github.com/Owais928/Query-Performance-Insights-QPI/issues",
-    "email": "awaisanwar23@gmail.com"
-  },
-  "license": "MIT",
-  "commercial": "No",
-  "author": {
-    "name": "MUHAMMAD AWAIS",
-    "email": "awaisanwar23@gmail.com",
-    "url": "https://oratechbyawais.blogspot.com/"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Owais928/Query-Performance-Insights-QPI.git"
-  },
-  "oracle": {
-    "versions": ["19.0.0", "21.0.0", "23.0.0", "26.0.0"],
-    "apex": {
-      "versions": ["24.2"],
-      "plugin": {
-        "internalName": "COM.ORATECH.QPI",
-        "type": "region",
-        "demo": "https://portfolio.oracletech.com.pk/ords/r/ot/apex-query-performance-insights-qpi/login",
-        "previewImage": "https://raw.githubusercontent.com/Owais928/Query-Performance-Insights-QPI/main/QPI.gif"
-      }
+    "name": "Query Performance Insights (QPI)",
+    "version": "1.0.0",
+    "description": "Professional Oracle APEX Region Plugin for real-time SQL execution monitoring, plan hash detection, and execution plan visualization using DBMS_XPLAN.",
+    "keywords": [
+        "oracle apex",
+        "apex plugin",
+        "sql performance",
+        "execution plan",
+        "dbms_xplan",
+        "plan hash",
+        "performance monitoring",
+        "query optimization"
+    ],
+    "homepage": "https://github.com/Owais928/Query-Performance-Insights-QPI",
+    "bugs": {
+        "url": "https://github.com/Owais928/Query-Performance-Insights-QPI/issues",
+        "email": "awaisanwar23@gmail.com"
+    },
+    "license": "MIT",
+    "commercial": "No",
+    "author": {
+        "name": "MUHAMMAD AWAIS",
+        "email": "awaisanwar23@gmail.com",
+        "url": "https://oratechbyawais.blogspot.com/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Owais928/Query-Performance-Insights-QPI.git"
+    },
+    "oracle": {
+        "versions": [
+            "19.0.0",
+            "21.0.0",
+            "23.0.0",
+            "26.0.0"
+        ],
+        "apex": {
+            "versions": [
+                "24.2"
+            ],
+            "plugin": {
+                "internalName": "COM.ORATECH.QPI",
+                "type": "region",
+                "demo": "https://portfolio.oracletech.com.pk/ords/r/ot/apex-query-performance-insights-qpi/login",
+                "previewImage": "https://raw.githubusercontent.com/Owais928/Query-Performance-Insights-QPI/main/QPI.gif"
+            }
+        }
     }
-  }
+}

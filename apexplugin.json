@@ -1,0 +1,44 @@
+{
+  "name": "Query Performance Insights (QPI)",
+  "version": "1.0",
+  "description": "Professional Oracle APEX Region Plugin for real-time SQL execution monitoring, plan hash detection, and execution plan visualization using DBMS_XPLAN.",
+  "keywords": [
+    "oracle apex",
+    "apex plugin",
+    "sql performance",
+    "execution plan",
+    "dbms_xplan",
+    "plan hash",
+    "performance monitoring",
+    "query optimization"
+  ],
+  "homepage": "https://github.com/Owais928/Data-Quality-Insights-Oracle-Apex-Plugin",
+  "bugs": {
+    "url": "https://github.com/Owais928/Data-Quality-Insights-Oracle-Apex-Plugin/issues",
+    "email": "awaisanwar23@gmail.com"
+  },
+  "license": "MIT",
+  "commercial": "No",
+  "author": {
+    "name": "MUHAMMAD AWAIS",
+    "email": "awaisanwar23@gmail.com",
+    "url": "https://oratechbyawais.blogspot.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Owais928/Data-Quality-Insights-Oracle-Apex-Plugin.git"
+  },
+  "previewImage": "https://github.com/Owais928/Data-Quality-Insights-Oracle-Apex-Plugin/blob/main/QPI.gif",
+  "oracle": {
+    "versions": ["19c", "21c", "23c", "26ai"],
+    "apex": {
+      "versions": ["24.2"],
+      "plugin": {
+        "internalName": "QPI.APEX.PLUGIN",
+        "type": "region",
+        "demo": "https://portfolio.oracletech.com.pk/ords/r/ot/apex-query-performance-insights-qpi/login",
+        "previewImage": "https://github.com/Owais928/Data-Quality-Insights-Oracle-Apex-Plugin/blob/main/QPI.gif"
+      }
+    }
+  }
+}

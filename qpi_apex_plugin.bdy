@@ -31,7 +31,20 @@ create or replace package body qpi_apex_plugin as
       return lower(rawtohex(l_raw));
   end;
 
-  procedure ajax_region(
+  function hash_query(p_clob clob) return varchar2 is
+      l_v varchar2(32767);
+      l_h varchar2(64);
+    begin
+      l_v := dbms_lob.substr(p_clob, 32000, 1);
+
+      select lower(standard_hash(l_v, 'SHA256'))
+        into l_h
+        from dual;
+
+      return l_h;
+    end;
+
+procedure ajax_region(
     p_region in apex_plugin.t_region,
     p_plugin in apex_plugin.t_plugin,
     p_param  in apex_plugin.t_region_ajax_param,
@@ -93,22 +106,12 @@ create or replace package body qpi_apex_plugin as
       return;
     end if;
 
-    l_query_hash := sha1(l_sql_query);
+    l_query_hash := hash_query(l_sql_query);--sha1(l_sql_query);
     l_marker := '/*QPI:'||l_query_hash||':'||to_char(systimestamp,'YYYYMMDDHH24MISSFF3')||'*/';
 
     l_dyn := l_marker || chr(10) ||
       'with src as ('||chr(10)|| l_sql_query ||chr(10)||') '||
       'select count(*) CNT from (select * from src fetch first :SAMPLE_ROWS rows only)';
-    /*l_marker := '/*QPI:'||l_query_hash||':A'||v('APP_ID')||':P'||v('APP_PAGE_ID')||
-            ':R'||nvl(p_region.static_id,'QPI_'||p_region.id)||':'||to_char(systimestamp,'YYYYMMDDHH24MISSFF3')||'';
-    -- Wrap query to count rows returned (sampled)
-    l_dyn :=
-            l_marker||chr(10)||
-            'with src as ('||chr(10)||l_sql_query||chr(10)||') '||
-            'select count(*) as CNT from (select * from src fetch first :SAMPLE_ROWS rows only)';*/
-    /*l_dyn :=
-      'with src as ('||chr(10)||l_sql_query||chr(10)||') '||
-      'select count(*) as CNT from (select * from src fetch first :SAMPLE_ROWS rows only)';*/
 
     l_start_ts := systimestamp;
 
@@ -194,32 +197,11 @@ create or replace package body qpi_apex_plugin as
           cursor_child_no => l_child,
           format          => 'ALLSTATS LAST'
         ));
-        /*select listagg(plan_table_output, chr(10)) within group (order by rownum)
-          into l_plan_text
-          from table(dbms_xplan.display_cursor(
-                sql_id           => l_sql_id,
-                cursor_child_no  => l_child,
-                format           => 'ALLSTATS LAST'
-              ));*/
       exception
         when others then
           l_plan_text := null;
       end;
     end if;
-    /*if l_sql_id is not null then
-      begin
-        select listagg(plan_table_output, chr(10)) within group (order by rownum)
-          into l_plan_text
-          from table(dbms_xplan.display_cursor(
-                sql_id        => l_sql_id,
-                cursor_child_no => l_child,
-                format        => l_plan_format
-              ));
-      exception
-        when others then
-          l_plan_text := null;
-      end;
-    end if;*/
     -- Status
     if l_elapsed_ms >= l_error_ms then
       l_status := 'bad';
@@ -287,7 +269,7 @@ begin
   -- Region container
   htp.p(
     '<div class="qpi" id="'||apex_escape.html_attribute(l_region_id)||'">'||
-    '<div class="qpi-loading">Measuring query performance…</div>'||
+    '<div class="qpi-loading">Measuring query performanceâ€¦</div>'||
     '</div>'
   );
 
@@ -309,35 +291,6 @@ begin
     '</script>'
   );
 end render_region;
-  /*procedure render_region(
-    p_region in apex_plugin.t_region,
-    p_plugin in apex_plugin.t_plugin,
-    p_param  in apex_plugin.t_region_render_param,
-    p_result in out nocopy apex_plugin.t_region_render_result
-  ) is
-    l_region_id varchar2(200) := nvl(p_region.static_id, 'QPI_'||p_region.id);
-    l_ajax_id   varchar2(4000) := apex_plugin.get_ajax_identifier;
-  begin
-    apex_css.add_file(p_name => 'qpi', p_directory => p_plugin.file_prefix);
-    apex_javascript.add_library(p_name => 'qpi', p_directory => p_plugin.file_prefix);
-
-    htp.p(
-      '<div class="qpi" id="'||apex_escape.html_attribute(l_region_id)||'">'||
-      '<div class="qpi-loading">Measuring query performance…</div>'||
-      '</div>'
-    );
-
-    -- Inline init (works with deferred loading too)
-    htp.p(
-      '<script>(function(){'||
-      'var rid='||apex_escape.js_literal(l_region_id)||';'||
-      'var ajax='||apex_escape.js_literal(l_ajax_id)||';'||
-      'function go(){ if(window.QPI & QPI.init){ QPI.init({regionId:rid, ajaxId:ajax}); } else { setTimeout(go,50);} }'||
-      'go();'||
-      'if(window.apex & apex.jQuery){ apex.jQuery("#"+rid).off("apexafterrefresh.qpi").on("apexafterrefresh.qpi", function(){ go(); }); }'||
-      '})();</script>'
-    );
-  end render_region;*/
-
+  
 end qpi_apex_plugin;
 /
